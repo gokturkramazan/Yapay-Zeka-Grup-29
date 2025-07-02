@@ -64,7 +64,7 @@ Bu veri setlerinin projeye bilimsel geçerlik, model eğitimi ve benchmark sağl
 | Analitik / Görselleştirme | Chart.js / D3.js                                       |
 
 
-## 🧠 8. Hedeflenen Eğitimsel Katkı ve Yenilik
+## 🧠 7. Hedeflenen Eğitimsel Katkı ve Yenilik
 - Geleneksel sistemlerin aksine akademik değil bilişsel gelişime odaklanır.
 - Bireylerin gelişimini veriyle şeffaf biçimde izleme imkânı verir.
 - Oyunlaştırma + yapay zekâ + gelişim takibi üçlüsünü entegre eden yenilikçi bir yapıya sahiptir.
