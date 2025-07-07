@@ -87,6 +87,11 @@ Bu veri setlerinin projeye bilimsel geçerlik, model eğitimi ve benchmark sağl
 **Backlog düzeni ve Story seçimleri:** Backlog'umuz görevlerin parçalar halinde tamamlanması üzerine düzenlenmiş olup tamamlananan görevlerin sonraki sprintlerde ve farklı görevlerde yatay olarak kullanılabilmesine imkan tanıyacak şekilde düzenlenmiştir. 2 farklı ekip ile ilerlemeyi planlamaktayız. <br> 
 **Veri Bilimi Ekibi:** Ramazan, Hamza, Miray <br> 
 **AI Geliştirme Ekibi:** Sara, Tuğba <br> <br> 
+**Sprint Review:** 
+Görev dağılımları yapılmış, product owner, scrum master ve developerlar belirlenmiştir.
+Proje konu fikirleri öne sunulmuş ve ortak projeye karar verilmiştir.
+Proje her sprint aşamasına göre hedef odaklı palnlanıp, veri bilimi-yapay zeka hedefleri whatsap üzerinden takım bilgilendirilmiştir.
+Sprint review katılımcıları: Ramazan Göktürk, Hamza DERİM
 
 **Daily Scrum:** Daily Scrum toplantıları ve iletişim WhatsApp üzerinden sağlanmaktadır. <br> <br>
 
