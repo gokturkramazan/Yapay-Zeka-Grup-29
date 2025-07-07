@@ -88,10 +88,14 @@ Bu veri setlerinin projeye bilimsel geçerlik, model eğitimi ve benchmark sağl
 **Veri Bilimi Ekibi:** Ramazan, Hamza, Miray <br> 
 **AI Geliştirme Ekibi:** Sara, Tuğba <br> <br> 
 **Sprint Review:** 
-Görev dağılımları yapılmış, product owner, scrum master ve developerlar belirlenmiştir.
-Proje konu fikirleri öne sunulmuş ve ortak projeye karar verilmiştir.
-Proje her sprint aşamasına göre hedef odaklı palnlanıp, veri bilimi-yapay zeka hedefleri whatsap üzerinden takım bilgilendirilmiştir.
-Sprint review katılımcıları: Ramazan Göktürk, Hamza DERİM
+Görev dağılımları yapılmış, product owner, scrum master ve developerlar belirlenmiştir.<br> <br> 
+Proje konu fikirleri öne sunulmuş ve ortak projeye karar verilmiştir.<br> <br> 
+Proje her sprint aşamasına göre hedef odaklı palnlanıp, veri bilimi-yapay zeka hedefleri whatsap üzerinden takım bilgilendirilmiştir.<br> <br> 
+Sprint review katılımcıları: Ramazan Göktürk, Hamza DERİM<br> <br> 
+**Sprint Retrospective** Görev dağılımları ve ilerleyiş kapsamlı olarak ekiple paykaşılmıştır. <br> <br> 
+**Veri Bilimi1**: Hamza DERİM, **Veri Bilimi2:** Ramazan Göktürk, **Veri Bilimi3:** Miray KAhveci görevler paylaşılmıştır. <br> <br> 
+**AI Geliştirme Ekibi:** Sara, Tuğba Grupta aktif olmayarak görev almamıştır. <br> <br> 
+CognitiveTrack_Rol_Dagilimi_Kapsamli.docx<br> <br> 
 
 **Daily Scrum:** Daily Scrum toplantıları ve iletişim WhatsApp üzerinden sağlanmaktadır. <br> <br>
 
