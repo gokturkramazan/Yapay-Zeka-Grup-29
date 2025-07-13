@@ -88,14 +88,14 @@ Bu veri setlerinin projeye bilimsel geçerlik, model eğitimi ve benchmark sağl
 **Veri Bilimi Ekibi:** Ramazan, Hamza, Miray <br> 
 **AI Geliştirme Ekibi:** Sara, Tuğba <br> <br> 
 **Sprint Review:** 
-Görev dağılımları yapılmış, product owner, scrum master ve developerlar belirlenmiştir.<br> <br> 
-Proje konu fikirleri öne sunulmuş ve ortak projeye karar verilmiştir.<br> <br> 
-Proje her sprint aşamasına göre hedef odaklı palnlanıp, veri bilimi-yapay zeka hedefleri whatsap üzerinden takım bilgilendirilmiştir.<br> <br> 
-Sprint review katılımcıları: Ramazan Göktürk, Hamza DERİM<br> <br> 
-**Sprint Retrospective** Görev dağılımları ve ilerleyiş kapsamlı olarak ekiple paykaşılmıştır. <br> <br> 
-**Veri Bilimi1**: Hamza DERİM, **Veri Bilimi2:** Ramazan Göktürk, **Veri Bilimi3:** Miray KAhveci görevler paylaşılmıştır. <br> <br> 
-**AI Geliştirme Ekibi:** Sara, Tuğba Grupta aktif olmayarak görev almamıştır. <br> <br> 
-CognitiveTrack_Rol_Dagilimi_Kapsamli.docx<br> <br> 
+- Görev dağılımları yapılmış, product owner, scrum master ve developerlar belirlenmiştir.<br> <br> 
+- Proje konu fikirleri öne sunulmuş ve ortak projeye karar verilmiştir.<br> <br> 
+- Proje her sprint aşamasına göre hedef odaklı palnlanıp, veri bilimi-yapay zeka hedefleri whatsap üzerinden takım bilgilendirilmiştir.<br> <br> 
+- **Sprint review katılımcıları:** Ramazan Göktürk, Hamza DERİM<br> <br> 
+- **Sprint Retrospective** Görev dağılımları ve ilerleyiş kapsamlı olarak ekiple paykaşılmıştır. <br> <br> 
+- **Veri Bilimci 1**: Hamza DERİM, **Veri Bilimci 2:** Ramazan Göktürk, **Veri Bilimci 3:** Miray Kahveci görevler paylaşılmıştır. <br> <br> 
+- **AI Geliştirme Ekibi:** Sara, Tuğba Grupta aktif olmayarak görev almamıştır. <br> <br> 
+- CognitiveTrack_Rol_Dagilimi_Kapsamli.docx<br> <br> 
 
 **Daily Scrum:** Daily Scrum toplantıları ve iletişim WhatsApp üzerinden sağlanmaktadır. <br> <br>
 
@@ -113,4 +113,34 @@ CognitiveTrack_Rol_Dagilimi_Kapsamli.docx<br> <br>
 | 🎮 Test & Beceri Eşleşmesi | Oyun – Veri eşleşme tablosu hazırlanması                  | Hangi oyun (Stroop, n-back...) hangi veri seti ile eşleşiyor ve hangi beceriyi ölçüyor? Tablo halinde döküm.       | AI Geliştirme Ekibi       |10              |
 | 🎮 Test & Beceri Eşleşmesi | Oyunlardan hangi metrikler toplanacak?                    | Süre, doğruluk, hatalı cevap sayısı gibi hangi metriklerin kaydedileceği netleştirilecek.                          | AI Geliştirme Ekibi       |10              |
 
+## --- SPRINT 2 - Skor İşleme, Sınıflandırma & Öneri Sistemi Taslağı ---
+*7 Temmuz - 20 Temmuz* <br>
+<br>
+**Sprint Amacı:**
+- Veri setlerinden kullanıcı skorlarını sınıflandırmak
+- Öneri motorunun temel kurgusunu oluşturmak
+- Skor verisi üzerinden temel backend-akışları kurmak
+- Sprint 1'den kalan eksiklerin tamamlanması
+- Pasif ekip üyeleriyle yolların ayrılması <br><br>
 
+**Sprint içinde tamamlanması tahmin edilen puan:** 120 Puan<br> <br>
+**Puan Tamamlama Mantığı:** Bu sprint için proje başında 120 puan belirlemiş olsak da pasif ekip üyeleri sebebiyle ilk sprintteki eksikleri bu bölüme aktarıp revize yoluna gittik.Tahmin edilen puan 140 olarak güncellendi.   <br> <br>
+**Backlog düzeni ve Story seçimleri:** Bu bölümde Backlog'umuz görevlerin zaman aralıklarında ekip üyelerine aktarılıp devam etmesi üzerine hiyerarşik şekilde ilerlemesi planlanmıştır. Aynıu şekilde 2 farklı ekip ile ilerlemeyi planlamaktayız. <br> 
+**Veri Bilimi Ekibi:** Ramazan, Hamza, Miray <br> 
+**AI Geliştirme Ekibi:** Sara, Tuğba <br> <br> 
+
+**🧩 Genel Sprint Tablosu : CognitiveTrack – Sprint 2**
+| **List** (Kategori)        | **Card (Görev)**                                          | **Açıklama / Alt Görevler**                                                                                        | **Sorumlu**               |**Puan**                 
+| -------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------- |----------------|
+| 📦 Veri Hazırlığı            | Skor verilerinin normalize edilmesi                     | Tüm test skorları ortak forma getirilir (z-score, min-max vb.)                                                     | Veri Bilimi Ekibi                  |10   |
+| 📦 Veri Hazırlığı            | Eksik ve anomali değerlerin temizlenmesi              | Outlier analizleri yapılır, eksik veri stratejisi belirlenir (drop/impute)                                           | Veri Bilimi Ekibi                  |10 |
+| 🧠 Beceri Sınıflandırma       | N-back testine göre çalışma belleği düzeyi sınıflandırması (düşük/orta/yüksek)   | Tüm veri setlerin final versiyonu ai ekibi ile paylaşılacak.                                            | Veri Bilimi Ekibi   |20|
+| 🧠 Beceri Sınıflandırma        | Tepki süresi + hata oranı ile dikkat düzeyi analizi  | Reaction Time veri seti ile kullanıcı tipi segmentasyonu (dikkatli, hızlı, hatalı...)                            | Veri Bilimi Ekibi                       |10|
+| 🎮 Test & Beceri Eşleşmesi      | Oyun – Veri eşleşme tablosu hazırlanması  | Hangi oyun (Stroop, n-back...) hangi veri seti ile eşleşiyor ve hangi beceriyi ölçüyor? Tablo halinde döküm.                 | Veri Bilimi Ekibi                   |25 |
+| 🎮 Test & Beceri Eşleşmesi     | Oyunlardan hangi metrikler toplanacak?              | Doğruluk, n\_level analizi, dağılım                                                                                | AI Geliştirme Ekibii         |25            |
+| 🔧 Backend         | Skor verisini kaydeden API (JSON POST)                          | Test sonrası kullanıcıdan gelen skorları backend’e yazan endpoint yapılır                                            | AI Geliştirme Ekibi        |10            |
+| 🔧 Backend         | Kullanıcı sınıfını dönen API (ör: "çalışma belleği: orta")      | Model sonuçlarını front-end’e dönen örnek servis kurulur                                                            | AI Geliştirme Ekibi         |10            |
+| 🧠 Öneri Motoru Tasarımı | Beceri sınıfına göre öneri eşleştirmeleri tanımlanır      | "Bellek düşükse → N-back öner", "Dikkat düşükse → Stroop ver", gibi kural bazlı ilk öneri seti hazırlanır           | AI Geliştirme Ekibi       |10              |
+| 🧠 Öneri Motoru Tasarımı | Öneri motoru için temel JSON yapısı tasarımı              | Frontend’in okuyabileceği formatta öneri verileri nasıl dönecek belirlenir (örnek: oyun adı, zorluk, tekrar sayısı...)| AI Geliştirme Ekibi       |10            |
+
+**Sprint Review:**
