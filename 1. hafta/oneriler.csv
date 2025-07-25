@@ -1,0 +1,6 @@
+user_id,accuracy,reaction_time,moral_status,academic_level,memory_level,onerilen_egzersiz
+101,0.43,0.9,orta,orta,düşük,Kolay dikkat oyunu
+102,0.92,1.4,yüksek,yüksek,orta,Refleks hızlandırıcı oyun
+103,0.86,0.8,düşük,orta,orta,Motivasyon artırıcı oyun
+104,0.79,0.7,orta,düşük,yüksek,Temel beceri egzersizi
+105,0.85,0.6,orta,orta,orta,Gelişmiş 2-Back oyunu
