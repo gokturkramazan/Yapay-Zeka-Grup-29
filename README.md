@@ -144,3 +144,46 @@ Bu veri setlerinin projeye bilimsel geçerlik, model eğitimi ve benchmark sağl
 | 🧠 Öneri Motoru Tasarımı | Öneri motoru için temel JSON yapısı tasarımı              | Frontend’in okuyabileceği formatta öneri verileri nasıl dönecek belirlenir (örnek: oyun adı, zorluk, tekrar sayısı...)| AI Geliştirme Ekibi       |10            |
 
 **Sprint Review:**
+- Bir önceki spirintten kalan eksikler tamamlanmıştır.
+- Bir veri setinde değişiklik yapılmıştır. Yeni veri seti cognitive_performance_analysis. 
+- Bu sprintte tamamlanan puan 110 (veri seti değişikliği diğer sprinte aktarıldı). 
+- **Sprint review katılımcıları:** Ramazan Göktürk, Hamza DERİM, Müzeyyen Miray Kahveci, Sara Karaçaylı, Kader Tuğba Yaramış 
+- **Sprint Retrospective** Görev dağılımları ve ilerleyiş kapsamlı olarak ekiple paykaşılmıştır. <br> <br>
+
+  ## --- SPRINT 3 - MVP Çıkarma, Entegrasyon ve Proje Teslimi  ---
+*21 Temmuz - 3 Ağustos* <br>
+<br>
+
+**Sprint Amacı:**
+- Skor analizi + öneri motorunu çalışır hale getirerek MVP’yi ortaya çıkarmak
+- Frontend – Backend entegrasyonunun tamamlanması
+- Öneri motorunun test edilmesi ve çıktıların doğrulanması
+- Proje sunum materyallerinin hazırlanması (slayt, demo videosu, teknik dokümantasyon)
+- GitHub düzenlemesinin yapılması ve sunum videosu <br><br>
+
+**Sprint içinde tamamlanması tahmin edilen puan:** 100 Puan<br> <br>
+**Puan Tamamlama Mantığı:** Bu sprintte temel amaç tamamlanan parçaları entegre edip çalışır hale getirmek olduğu için, görevler yüksek etki puanına sahiptir. Kritik görevler (backend–frontend entegrasyonu, öneri motoru) 20’şer puan; destekleyici görevler (rapor, sunum, testler) 10–15 puan olarak puanlanmıştır.   <br> <br>
+**Backlog düzeni ve Story seçimleri:** Sprint 1 ve Sprint 2’de tamamlanan parçalar birleştirilerek tek bir akış haline getirildi. Ekip iki ana kolda çalıştı: Bilimi & AI Ekibi: Öneri motorunun iyileştirilmesi ve testler. Yazılım & Entegrasyon Ekibi: API ve frontend entegrasyonu, demo ortamı hazırlığı <br> 
+**Veri Bilimi Ekibi:** Ramazan, Hamza, Miray <br> 
+**AI Geliştirme Ekibi:** Sara, Tuğba <br> <br> 
+
+| **List** (Kategori)   | **Card (Görev)**                          | **Açıklama / Alt Görevler**                                                       | **Sorumlu**         | **Puan** |
+| --------------------- | ----------------------------------------- | --------------------------------------------------------------------------------- | ------------------- | -------- |
+| 🔧 Entegrasyon        | Frontend – Backend entegrasyonu           | API’den gelen skor ve önerilerin React/Unity arayüzüne bağlanması                 | AI Geliştirme Ekibi | 20       |
+| 🧠 Öneri Motoru       | Kural bazlı öneri motorunun test edilmesi | Bellek/dikkat sınıflarına göre doğru öneri geliyor mu, hata testleri              | Veri Bilimi Ekibi   | 15       |
+| 🧠 Öneri Motoru       | Öneri çıktılarının görselleştirilmesi     | Kullanıcıya gösterilecek formatta önerilerin düzenlenmesi (JSON → Görsel kartlar) | AI Geliştirme Ekibi | 10       |
+| 📊 Skor Analizi       | Skor trendlerinin kullanıcıya sunumu      | Zaman serisi grafikleri ile ilerleme takibi (Chart.js)                            | Veri Bilimi Ekibi   | 15       |
+| 🎮 Demo Hazırlığı     | Mini oyunlardan veri toplama akışı        | Oyun oynandıktan sonra skorun API’ye kaydedilmesi                                 | AI Geliştirme Ekibi | 10       |
+| 📦 Dokümantasyon      | GitHub ReadMe ve teknik doküman           | Proje çalışma mantığı, kurulum adımları, API endpoint açıklamaları                | Ramazan             | 10       ||
+| ✅ Test ve Son Kontrol | Entegre sistem üzerinde testler           | Kullanıcı akışında hata var mı kontrolü, küçük bug’ların düzeltilmesi             | Tüm ekip            | 20       |
+
+**Sprint Review:**
+- MVP tamamlanmış, öneri motoru ve skor analizi entegre edilmiştir.
+- Backend ve frontend arasındaki veri akışı başarılı şekilde sağlanmıştır.
+- Oyunlardan gelen skorların kaydedilmesi ve öneriye dönüştürülmesi sorunsuz çalışmaktadır.
+- Sunum materyalleri ve demo videosu hazırlanmıştır.
+- **Sprint Review Katılımcıları: Ramazan Göktürk, Hamza Derim, Müzeyyen Miray Kahveci, Sara Karaçaylı, Kader Tuğba Yaramış**
+- **Sprint Retrospective** Görev dağılımları ve ilerleyiş kapsamlı olarak ekiple paykaşılmıştır. <br> <br>
+
+  ## --- Değerlendirme ve Teşekkür  ---
+Yaklaşık 1 aydır ekip olarak fikirden prototipe uzanan bu yolculukta, her sprintte hedeflerimizi adım adım gerçekleştirmeye özen gösterdik. Veri analizi, yapay zekâ entegrasyonu ve oyunlaştırma bileşenlerini tamamlayarak CognitiveTrack’i çalışır hale getirdik. Ekip uyumu ve sürekli iletişim sayesinde proje hedeflerimize ulaşmak için elimizden geleni yaptık. Keyifli bir süreçti. Tüm ekip arkadaşlarımıza emekleri için teşekkür ederiz. Ayrıca bu 9 ayylık bursiyerlik sürecinde bize destek olan tüm akademi danışmanlarına da teşekkürlerimizi sunarız. 🚀 
