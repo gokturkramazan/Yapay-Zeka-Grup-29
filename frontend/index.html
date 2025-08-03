@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zihin Yolculuğu - Dashboard</title>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: #666;
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+
+    .loading-spinner {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .error-message {
+      background: #fed7d7;
+      color: #c53030;
+      padding: 16px;
+      border-radius: 12px;
+      margin: 16px 0;
+      border-left: 4px solid #c53030;
+      display: none;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 20px 20px 0 0;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .stat-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+    }
+
+    .stat-value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #1a202c;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      color: #718096;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-notification {
+      background: linear-gradient(135deg, #48bb78, #38a169);
+      color: white;
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 10px 30px rgba(72, 187, 120, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: slideInUp 0.6s ease-out;
+      display: none;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .badge-notification h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-notification p {
+      opacity: 0.95;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .badge-collection {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 32px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .badge-collection h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #1a202c;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badges-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .badge {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .badge.aktif {
+      background: linear-gradient(135deg, #c6f6d5, #9ae6b4);
+      border-color: #48bb78;
+      box-shadow: 0 8px 25px rgba(72, 187, 120, 0.2);
+    }
+
+    .badge.kilitli {
+      background: #f7fafc;
+      color: #a0aec0;
+      border-color: #e2e8f0;
+    }
+
+    .badge:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .badge-icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .badge-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: inherit;
+    }
+
+    .chart-container {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 32px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .chart-container h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #1a202c;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .action-button {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 16px;
+      padding: 16px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 0 auto;
+      min-width: 200px;
+    }
+
+    .action-button:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+    }
+
+    .action-button:active {
+      transform: translateY(-1px);
+    }
+
+    .action-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+        margin: 10px;
+      }
+      
+      .header h1 {
+        font-size: 2rem;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .badges-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    * {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+  </style>
+
+  <!-- Chart.js kütüphanesi -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- jsPsych kütüphaneleri -->
+  <script src="https://unpkg.com/jspsych@7.3.4"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.2"></script>
+  <link href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🧠 Zihin Yolculuğu</h1>
+      <p>Kullanıcı Paneli (User ID: <span id="user-id">U1</span>)</p>
+    </div>
+
+    <div class="loading-spinner" id="loading"></div>
+    <div class="error-message" id="error-message"></div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-value" id="skor-value">--</div>
+        <div class="stat-label">Günlük Skor</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-value" id="zorluk-value">--</div>
+        <div class="stat-label">Zorluk Seviyesi</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-value" id="rozet-count">--</div>
+        <div class="stat-label">Kazanılan Rozetler</div>
+      </div>
+    </div>
+
+    <div class="badge-notification" id="rozet-notification">
+      <!-- Badge notifications will be populated here -->
+    </div>
+
+    <div class="badge-collection">
+      <h3>🏅 Rozet Koleksiyonu</h3>
+      <div class="badges-grid" id="rozet-koleksiyonu">
+        <!-- Rozetler buraya dinamik olarak eklenecek -->
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <h3>📈 Gelişim Grafiği</h3>
+      <canvas id="chart"></canvas>
+    </div>
+
+    <button class="action-button" onclick="runTest()" id="test-button">
+      🚀 Testi Başlat (Stroop)
+    </button>
+  </div>
+
+  <script>
+    // Configuration - Backend API URLs
+    const API_BASE_URL = 'http://localhost:8000/api'; // Sara's backend runs on port 8000
+    const CURRENT_USER_ID = 'U1'; // This could be dynamic based on login
+    
+    // Global variables
+    let chartInstance = null;
+    let jsPsych = null;
+
+    // Initialize jsPsych
+    function initializeJsPsych() {
+      jsPsych = initJsPsych({
+        on_finish: function () {
+          const trials = jsPsych.data.get().values();
+          
+          // Filter out practice trials or non-test trials
+          const testTrials = trials.filter(trial => trial.trial_type === 'html-keyboard-response' && trial.stimulus);
+          
+          const responses = testTrials.map(t => t.response);
+          const reaction_times = testTrials.map(t => t.rt);
+          const correctResponses = testTrials.map(t => t.correct_response);
+
+          const accuracy = responses.filter((r, i) => r === correctResponses[i]).length / responses.length;
+          const total_time = reaction_times.reduce((sum, rt) => sum + rt, 0);
+
+          const testResult = {
+            user_id: CURRENT_USER_ID,
+            test_type: "attention_stroop",
+            responses: responses,
+            reaction_times: reaction_times,
+            accuracy: accuracy,
+            total_time: total_time,
+            timestamp: new Date().toISOString()
+          };
+
+          submitTestResult(testResult);
+        }
+      });
+    }
+
+    // API Functions
+    async function fetchDashboardData(userId) {
+      showLoading(true);
+      try {
+        const response = await fetch(`${API_BASE_URL}/dashboard-data/${userId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+        showError('Dashboard verisi yüklenirken hata oluştu: ' + error.message);
+        return null;
+      } finally {
+        showLoading(false);
+      }
+    }
+
+    async function fetchUserStats(userId) {
+      try {
+        const response = await fetch(`${API_BASE_URL}/user-stats/${userId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Error fetching user stats:', error);
+        return null;
+      }
+    }
+
+    async function submitTestResult(testResult) {
+      const testButton = document.getElementById('test-button');
+      testButton.disabled = true;
+      testButton.innerHTML = '⏳ Sonuç Gönderiliyor...';
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/test-result`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(testResult)
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        if (data.success) {
+          showNotification("Test sonucu başarıyla gönderildi! Dashboard güncelleniyor...", "success");
+          
+          // Show new badge if earned
+          if (data.recommendation && data.recommendation.suggested_achievement) {
+            showBadgeEarnedNotification(data.recommendation.suggested_achievement);
+          }
+          
+          // Refresh dashboard data
+          setTimeout(() => {
+            loadDashboardData();
+          }, 1000);
+        } else {
+          throw new Error(data.message || 'Test sonucu gönderilemedi');
+        }
+      } catch (error) {
+        console.error("Test sonucu gönderilirken hata:", error);
+        showError('Test sonucu gönderilirken hata oluştu: ' + error.message);
+      } finally {
+        testButton.disabled = false;
+        testButton.innerHTML = '🚀 Testi Başlat (Stroop)';
+      }
+    }
+
+    // UI Helper Functions
+    function showLoading(show) {
+      const loader = document.getElementById('loading');
+      loader.style.display = show ? 'block' : 'none';
+    }
+
+    function showError(message) {
+      const errorDiv = document.getElementById('error-message');
+      errorDiv.textContent = message;
+      errorDiv.style.display = 'block';
+      
+      // Auto-hide after 5 seconds
+      setTimeout(() => {
+        errorDiv.style.display = 'none';
+      }, 5000);
+    }
+
+    function showNotification(message, type = 'info') {
+      // You can implement a notification system here
+      alert(message); // Simple alert for now
+    }
+
+    function updateDashboardUI(data) {
+      if (!data) return;
+
+      // Update stats with Sara's backend data structure
+      document.getElementById('skor-value').textContent = data.daily_score || '0';
+      document.getElementById('zorluk-value').textContent = data.next_difficulty || 'Bilinmiyor';
+      document.getElementById('rozet-count').textContent = data.total_badges || '0';
+
+      // Update chart with Sara's data format
+      updateChart(data.score_history_for_chart || []);
+
+      // Update badge notifications - Sara's format includes awarded_at
+      updateBadgeNotifications(data.unlocked_badges || []);
+
+      // Update badge collection - Sara's format has badge_id field
+      updateBadgeCollection(data.all_badges || [], data.unlocked_badges || []);
+
+      // Additional info from Sara's API
+      if (data.performance_trend) {
+        console.log('Performance Trend:', data.performance_trend);
+      }
+      if (data.skill_level) {
+        console.log('Skill Level:', data.skill_level);
+      }
+      if (data.cognitive_profile) {
+        console.log('Cognitive Profile:', data.cognitive_profile);
+      }
+      if (data.behavior_type) {
+        console.log('Behavior Type:', data.behavior_type);
+      }
+    }
+
+    function updateChart(scoreHistory) {
+      const ctx = document.getElementById('chart').getContext('2d');
+      
+      // Destroy existing chart if it exists
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+
+      const labels = scoreHistory.map(entry => {
+        const date = new Date(entry.date);
+        return date.toLocaleDateString('tr-TR', { month: 'short', day: 'numeric' });
+      });
+      const scores = scoreHistory.map(entry => entry.score);
+
+      chartInstance = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "Performans Skoru",
+            data: scores,
+            borderColor: "#667eea",
+            backgroundColor: "rgba(102, 126, 234, 0.1)",
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: "#667eea",
+            pointBorderColor: "#ffffff",
+            pointBorderWidth: 3,
+            pointRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: { color: "rgba(0,0,0,0.05)" }
+            },
+            x: {
+              grid: { display: false }
+            }
+          }
+        }
+      });
+    }
+
+    function updateBadgeNotifications(unlockedBadges) {
+      const notificationDiv = document.getElementById('rozet-notification');
+      
+      if (unlockedBadges && unlockedBadges.length > 0) {
+        // Find the most recently awarded badge
+        const sortedBadges = unlockedBadges.sort((a, b) => 
+          new Date(b.awarded_at) - new Date(a.awarded_at)
+        );
+        const latestBadge = sortedBadges[0];
+        
+        notificationDiv.innerHTML = `
+          <h3>🎉 Yeni Rozet Kazandın!</h3>
+          <p><strong>${latestBadge.badge_name}</strong> — ${latestBadge.badge_description}</p>
+        `;
+        notificationDiv.style.display = 'block';
+      } else {
+        notificationDiv.style.display = 'none';
+      }
+    }
+
+    function showBadgeEarnedNotification(badgeName) {
+      const notificationDiv = document.getElementById('rozet-notification');
+      notificationDiv.innerHTML = `
+        <h3>🎉 Yeni Rozet Kazandın!</h3>
+        <p><strong>${badgeName}</strong> — Tebrikler! Yeni bir başarı rozetini kazandın!</p>
+      `;
+      notificationDiv.style.display = 'block';
+      
+      // Auto-hide after 8 seconds
+      setTimeout(() => {
+        notificationDiv.style.display = 'none';
+      }, 8000);
+    }
+
+    function updateBadgeCollection(allBadges, unlockedBadges) {
+      const badgeIcons = {
+        "İstikrarlı Oyuncu": "🎯",
+        "Keskin Göz": "👁️", 
+        "Puan Canavarı": "🦁",
+        "Dayanıklılık": "💪",
+        "Dayanıklılık Savaşçısı": "⚔️",
+        "Hız Şampiyonu": "⚡",
+        "Mükemmeliyetçi": "💯"
+      };
+
+      const koleksiyon = document.getElementById("rozet-koleksiyonu");
+      koleksiyon.innerHTML = "";
+
+      // Create a map of unlocked badge IDs for quick lookup
+      const unlockedBadgeIds = unlockedBadges.map(badge => badge.badge_id);
+      const unlockedBadgeNames = unlockedBadges.map(badge => badge.badge_name);
+
+      // If we have all badges data from backend, show all badges
+      if (allBadges && allBadges.length > 0) {
+        allBadges.forEach(badge => {
+          const isUnlocked = unlockedBadgeIds.includes(badge.badge_id);
+          const div = document.createElement("div");
+          div.className = `badge ${isUnlocked ? "aktif" : "kilitli"}`;
+          div.innerHTML = `
+            <span class="badge-icon">${isUnlocked ? (badgeIcons[badge.badge_name] || "🏅") : "🔒"}</span>
+            <div class="badge-name">${badge.badge_name}</div>
+          `;
+          koleksiyon.appendChild(div);
+        });
+      } else {
+        // Fallback: show only unlocked badges (backend response format)
+        unlockedBadges.forEach(badge => {
+          const div = document.createElement("div");
+          div.className = "badge aktif";
+          div.innerHTML = `
+            <span class="badge-icon">${badgeIcons[badge.badge_name] || "🏅"}</span>
+            <div class="badge-name">${badge.badge_name}</div>
+          `;
+          koleksiyon.appendChild(div);
+        });
+
+        // Add some common locked badges for visual completeness
+        const commonBadges = ["Puan Canavarı", "Dayanıklılık Savaşçısı", "Mükemmeliyetçi"];
+        commonBadges.forEach(badgeName => {
+          if (!unlockedBadgeNames.includes(badgeName)) {
+            const div = document.createElement("div");
+            div.className = "badge kilitli";
+            div.innerHTML = `
+              <span class="badge-icon">🔒</span>
+              <div class="badge-name">${badgeName}</div>
+            `;
+            koleksiyon.appendChild(div);
+          }
+        });
+      }
+    }
+
+    async function checkBackendHealth() {
+      try {
+        const response = await fetch(`${API_BASE_URL}/health`);
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Backend Health:', data);
+          return data.status === 'healthy';
+        }
+        return false;
+      } catch (error) {
+        console.error('Backend health check failed:', error);
+        return false;
+      }
+    }
+
+    // Main dashboard loading function
+    async function loadDashboardData() {
+      // First check if backend is healthy
+      const isHealthy = await checkBackendHealth();
+      if (!isHealthy) {
+        showError('Backend servisi şu anda erişilebilir değil. Lütfen Sara\'nın backend sunucusunun çalıştığından emin olun.');
+        showFallbackData();
+        return;
+      }
+
+      const data = await fetchDashboardData(CURRENT_USER_ID);
+      if (data) {
+        updateDashboardUI(data);
+        
+        // Optionally fetch additional user stats
+        const userStats = await fetchUserStats(CURRENT_USER_ID);
+        if (userStats) {
+          console.log('User Stats:', userStats);
+          // You can display additional user stats in the UI if needed
+        }
+      } else {
+        // Show fallback data or empty state
+        showFallbackData();
+      }
+    }
+
+    function showFallbackData() {
+      // Show some default values when backend is not available
+      document.getElementById('skor-value').textContent = '0';
+      document.getElementById('zorluk-value').textContent = 'Kolay';
+      document.getElementById('rozet-count').textContent = '0';
+      
+      // Show empty chart
+      updateChart([]);
+    }
+
+    // Stroop test function
+    async function runTest() {
+      if (!jsPsych) {
+        showError('Test sistemi henüz hazır değil. Lütfen sayfayı yenileyin.');
+        return;
+      }
+
+      const dashboardData = await fetchDashboardData(CURRENT_USER_ID);
+      const difficulty = dashboardData?.next_difficulty || "kolay";
+
+      let timeline = [];
+
+      if (difficulty === "kolay") {
+        timeline = [
+          {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: '<div style="font-size: 48px; color: green; font-weight: bold;">YEŞİL</div>',
+            choices: ['k', 'y', 'm'],
+            data: { correct_response: 'y' },
+            prompt: '<p>K=Kırmızı, Y=Yeşil, M=Mavi</p>',
+            trial_duration: 5000
+          },
+          {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: '<div style="font-size: 48px; color: red; font-weight: bold;">KIRMIZI</div>',
+            choices: ['k', 'y', 'm'],
+            data: { correct_response: 'k' },
+            prompt: '<p>K=Kırmızı, Y=Yeşil, M=Mavi</p>',
+            trial_duration: 5000
+          }
+        ];
+      } else if (difficulty === "orta") {
+        timeline = [
+          {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: '<div style="font-size: 48px; color: red;">YEŞİL</div>',
+            choices: ['k', 'y', 'm'],
+            data: { correct_response: 'y' },
+            prompt: '<p>K=Kırmızı, Y=Yeşil, M=Mavi</p>',
+            trial_duration: 4000
+          },
+          {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: '<div style="font-size: 48px; color: blue;">KIRMIZI</div>',
+            choices: ['k', 'y', 'm'],
+            data: { correct_response: 'k' },
+            prompt: '<p>K=Kırmızı, Y=Yeşil, M=Mavi</p>',
+            trial_duration: 4000
+          }
+        ];
+      } else if (difficulty === "zor") {
+        timeline = [
+          {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: '<div style="font-size: 48px; color: blue;">YEŞİL</div>',
+            choices: ['k', 'y', 'm'],
+            data: { correct_response: 'y' },
+            prompt: '<p>K=Kırmızı, Y=Yeşil, M=Mavi</p>',
+            trial_duration: 3000
+          },
+          {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: '<div style="font-size: 48px; color: green;">KIRMIZI</div>',
+            choices: ['k', 'y', 'm'],
+            data: { correct_response: 'k' },
+            prompt: '<p>K=Kırmızı, Y=Yeşil, M=Mavi</p>',
+            trial_duration: 3000
+          }
+        ];
+      }
+
+      jsPsych.run(timeline);
+    }
+
+
+    // Initialize the application
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize jsPsych
+      initializeJsPsych();
+      
+      // Load dashboard data
+      loadDashboardData();
+
+      // Page load animations
+      const cards = document.querySelectorAll('.stat-card, .badge-collection, .chart-container');
+      cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        setTimeout(() => {
+          card.style.transition = 'all 0.6s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, index * 100);
+      });
+    });
+
+    // Refresh data periodically (optional)
+    setInterval(() => {
+      loadDashboardData();
+    }, 300000); // Refresh every 5 minutes
+  </script>
+</body>
+</html>
